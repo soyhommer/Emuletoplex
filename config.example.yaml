@@ -1,0 +1,54 @@
+# EmuleToPlex configuration
+emule:
+  watch_paths:
+    # Usually eMule "Incoming" folder; add more if needed.
+    - "F:\\Datos PC OS SSD\\Admin\\Descargas\\eMule\\Incoming"
+  # Files must remain unchanged for this many seconds to be considered complete
+  stable_seconds: 120
+  # Process only these extensions (case-insensitive). Empty means all known video types.
+  allowed_extensions: [".mkv", ".mp4", ".avi", ".mov", ".m4v"]
+  # Also move sidecar files with the same base name (subtitles, nfo, etc.)
+  sidecar_extensions: [".srt", ".sub", ".idx", ".ass", ".nfo", ".smi", ".vtt"]
+
+plex:
+  # http(s) base url of Plex server (local is faster)
+  base_url: "http://127.0.0.1:32400"
+  # Library section IDs; at least one of these is recommended.
+  # Find IDs by visiting: http://127.0.0.1:32400/library/sections?X-Plex-Token=TOKEN
+  movies_section_id: 1
+  shows_section_id: 2
+  # If you prefer path-based refreshes, set these to your Plex library roots:
+  movies_root: "Y:\\raid_backup\\raid6tb\\public\\Peliculas"
+  shows_root: "Y:\\raid_backup\\raid6tb\\public\\Series"
+  # Raíces y secciones infantiles (opcional)
+  movies_kids_root: "Y:\\raid_backup\\raid6tb\\public\\Peliculas Infantiles"
+  shows_kids_root:  "Y:\\raid_backup\\raid6tb\\public\\Series Infantiles"
+  movies_kids_section_id: 3
+  shows_kids_section_id:  4
+  
+metadata:
+  enabled: true
+  provider: "tmdb"
+  language: "es-ES"
+  include_adult: false
+  fuzzy_threshold: 88
+  timeout_seconds: 8
+  
+renamer:
+  # Replace illegal filename characters
+  sanitize: true
+  # Remove release tags (720p/1080p/x264/etc.) from folder names
+  clean_release_tokens: true
+  # Overwrite if destination exists (otherwise skip or add numeric suffix)
+  overwrite: false
+  on_conflict: "suffix"   # "skip" | "overwrite" | "suffix"
+  non_latin_strategy: transliterate  # transliterate | drop | keep
+
+folders:
+  unclassified_root: "Unclassified"
+  
+logging:
+  level: "DEBUG"
+  log_file: "emuletoplex.log"
+  max_bytes: 5242880
+  backup_count: 5

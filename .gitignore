@@ -1,0 +1,19 @@
+# Ignora todo por defecto
+*
+
+# Permite entrar en subcarpetas
+!*/
+
+# Mantén estos ficheros de control
+!.gitignore
+!.gitattributes
+
+# Permite todos los ficheros de la raíz (cualquier extensión)
+!/*
+
+# Permite todo lo que haya dentro de docs/
+!docs/**
+
+# Secrets fuera de Git
+/secrets.yaml
+

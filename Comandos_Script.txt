@@ -1,0 +1,39 @@
+# 1) Create placeholders from your real eMule Incoming
+.\.venv\Scripts\python.exe .\make_placeholders.py `
+  --source "F:\Datos PC OS SSD\Admin\Descargas\eMule\Incoming" `
+  --out    "C:\Scripts\python\EmuleToPlex\prueba\EmuleIncomingTxt" `
+  --recursive
+
+# 2_PES7) Classify placeholders into a fake Plex library (no Plex touched)
+.\.venv\Scripts\python.exe .\emuletoplex_runner.py `
+  --test-mode `
+  --test-source      "C:\Scripts\python\videos\EmuleToPlex\prueba\EmuleIncomingTxt" `
+  --test-output-root "C:\Scripts\python\videos\EmuleToPlex\prueba\PlexLibrary" `
+  --once
+
+# 2_PES7) Classify placeholders into a fake Plex library (no Plex touched) OLDER VERSIONS
+
+.\.venv\Scripts\python.exe `
+  .\old_versions\emuletoplex_runner_v_0.23_p1_4_codex.py `
+  --test-mode `
+  --test-source "C:\Scripts\python\videos\EmuleToPlex\prueba\EmuleIncomingTxt" `
+  --test-output-root "C:\Scripts\python\videos\EmuleToPlex\prueba\PlexLibrary" `
+  --once
+
+# 2_CASA) Classify placeholders into a fake Plex library (no Plex touched)
+.\.venv\Scripts\python.exe .\emuletoplex_runner.py `
+  --test-mode `
+  --test-source      "C:\Scripts\python\EmuleToPlex\prueba\EmuleIncomingTxt" `
+  --test-output-root "C:\Scripts\python\EmuleToPlex\prueba\PlexLibrary" `
+  --once
+
+# 3) verify 2)
+.\.venv\Scripts\python.exe .\verify_manifest.py `
+  --actual .\prueba\PlexLibrary\_manifest.json `
+  --golden .\prueba\PlexLibraryObjective\_manifest_objective.json `
+  --output .\prueba\PlexLibrary\_results.json
+
+# 3) verifies all _manifest_v_XXX.json in any specific folder
+python verify_manifest.py `
+  --actual-glob ".\old_versions\_manifest_v_*.json" `
+  --golden ".\prueba\PlexLibraryObjective\_manifest_objective.json"

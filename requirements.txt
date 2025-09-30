@@ -1,0 +1,9 @@
+watchdog
+guessit
+pymediainfo
+requests
+pyyaml
+tenacity
+rapidfuzz
+unidecode
+pywin32; platform_system == "Windows"
